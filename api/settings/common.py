@@ -50,6 +50,9 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
 
     'corsheaders',
+    'rest_framework',
+
+    'apps.image',
 ]
 
 MIDDLEWARE_CLASSES = [
@@ -122,7 +125,7 @@ AUTH_PASSWORD_VALIDATORS = [
 # Internationalization
 # https://docs.djangoproject.com/en/1.9/topics/i18n/
 
-LANGUAGE_CODE = 'en-us'
+LANGUAGE_CODE = 'en-gb'
 
 TIME_ZONE = 'UTC'
 
@@ -138,6 +141,17 @@ USE_TZ = True
 
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 STATIC_URL = '/static/'
+
+
+# REST Framework
+# http://www.django-rest-framework.org/
+
+REST_FRAMEWORK = {
+    'DEFAULT_PERMISSION_CLASSES': [
+        'rest_framework.permissions.IsAuthenticatedOrReadOnly',
+    ],
+    'PAGE_SIZE': 10,
+}
 
 
 # CORS Headers

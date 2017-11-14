@@ -14,9 +14,23 @@ Including another URLconf
     2. Import the include() function: from django.conf.urls import url, include
     3. Add a URL to urlpatterns:  url(r'^blog/', include(blog_urls))
 """
-from django.conf.urls import url
+from django.conf.urls import include, url
 from django.contrib import admin
+from django.contrib.staticfiles.urls import staticfiles_urlpatterns
+
+from rest_framework import routers
+
+from apps.image.views import ImageViewSet
+
+
+router_v1 = routers.DefaultRouter()
+router_v1.register(r'images', ImageViewSet)
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
+    url(r'^v1/', include(router_v1.urls))
 ]
+
+# This is an inefficient helper for viewing images during development.
+# It does NOT work when `DEBUG = False`.
+urlpatterns += staticfiles_urlpatterns()
