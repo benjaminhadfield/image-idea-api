@@ -12,6 +12,14 @@ https://docs.djangoproject.com/en/1.9/ref/settings/
 
 import os
 
+
+# Env variables
+env = {
+    'SECRET_KEY': os.environ.get('DJANGO_SECRET_KEY', ''),
+    'ALLOWED_HOSTS': os.environ.get('DJANGO_ALLOWED_HOSTS', ''),
+    'CORS_ORIGIN_WHITELIST': os.environ.get('DJANGO_CORS_ORIGIN_WHITELIST', ''),
+}
+
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.dirname(
     os.path.abspath(__file__))))
@@ -21,14 +29,14 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.dirname(
 # See https://docs.djangoproject.com/en/1.9/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = os.environ.get('DJANGO_SECRET_KEY')
+SECRET_KEY = env['SECRET_KEY']
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = [host.strip() for host in
-                 os.environ.get('ALLOWED_HOSTS', '').split(',')
-                 if host]
+ALLOWED_HOSTS = [
+    host.strip() for host in env['ALLOWED_HOSTS'].split(',') if host
+]
 
 
 # Application definition
@@ -138,8 +146,5 @@ STATIC_URL = '/static/'
 # be requested from different domains.
 
 CORS_ORIGIN_WHITELIST = [
-    host.strip()
-    for host
-    in os.environ.get('CORS_ORIGIN_WHITELIST', '').split(',')
-    if host
+    host.strip() for host in env['CORS_ORIGIN_WHITELIST'].split(',') if host
 ]
