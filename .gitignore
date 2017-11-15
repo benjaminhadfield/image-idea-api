@@ -111,6 +111,7 @@ coverage.xml
 *.pot
 
 # Django stuff:
+static/
 *.log
 */settings/local.py
 requirements/local.txt
