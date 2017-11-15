@@ -7,7 +7,7 @@ class Image(models.Model):
     author = models.ForeignKey(User, on_delete=models.CASCADE)
     metadata = JSONField(null=True, blank=True)
     source = models.ImageField(
-        upload_to='static/',
+        upload_to='images',
         null=False,
         blank=False,
         max_length=500,
