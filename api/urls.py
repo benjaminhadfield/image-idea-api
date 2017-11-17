@@ -22,9 +22,11 @@ from django.conf.urls.static import static
 from rest_framework import routers
 
 from apps.image.views import ImageViewSet
+from apps.user.views import UserViewSet
 
 
 router_v1 = routers.DefaultRouter()
+router_v1.register(r'users', UserViewSet)
 router_v1.register(r'images', ImageViewSet)
 
 urlpatterns = [

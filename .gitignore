@@ -112,6 +112,7 @@ coverage.xml
 
 # Django stuff:
 static/
+media/
 *.log
 */settings/local.py
 requirements/local.txt

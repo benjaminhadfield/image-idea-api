@@ -52,6 +52,8 @@ INSTALLED_APPS = [
     'corsheaders',
     'rest_framework',
 
+    'apps.user',
+    'apps.user_profile',
     'apps.image',
 ]
 
@@ -120,6 +122,10 @@ AUTH_PASSWORD_VALIDATORS = [
         'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
     },
 ]
+
+
+# Custom USER model.
+AUTH_USER_MODEL = 'user.User'
 
 
 # Internationalization

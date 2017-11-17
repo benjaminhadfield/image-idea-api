@@ -5,5 +5,5 @@ from .serializers import ImageSerializer
 
 
 class ImageViewSet(viewsets.ModelViewSet):
-    queryset = Image.objects.all()
     serializer_class = ImageSerializer
+    queryset = Image.objects.all()
