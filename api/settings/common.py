@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/1.9/ref/settings/
 """
 
 import os
+import datetime
 
 
 # Env variables
@@ -156,10 +157,24 @@ MEDIA_URL = '/media/'
 # http://www.django-rest-framework.org/
 
 REST_FRAMEWORK = {
-    'DEFAULT_PERMISSION_CLASSES': [
+    'DEFAULT_AUTHENTICATION_CLASSES': (
+        'rest_framework_jwt.authentication.JSONWebTokenAuthentication',
+        # 'rest_framework.authentication.SessionAuthentication',
+    ),
+    'DEFAULT_PERMISSION_CLASSES': (
         'rest_framework.permissions.IsAuthenticatedOrReadOnly',
-    ],
+    ),
     'PAGE_SIZE': 10,
+}
+
+
+# REST Framework JWT
+
+JWT_AUTH = {
+    'JWT_AUDIENCE': env.get('ALLOWED_HOSTS', None),
+    'JWT_ISSUER': env.get('JWT_ISSUER', None),
+
+    'JWT_EXPIRATION_DELTA': datetime.timedelta(seconds=3600),
 }
 
 

@@ -20,6 +20,7 @@ from django.contrib import admin
 from django.conf.urls.static import static
 
 from rest_framework import routers
+from rest_framework_jwt.views import obtain_jwt_token
 
 from apps.image.views import ImageViewSet
 from apps.user.views import UserViewSet
@@ -29,9 +30,13 @@ router_v1 = routers.DefaultRouter()
 router_v1.register(r'users', UserViewSet)
 router_v1.register(r'images', ImageViewSet)
 
+api_v1 = [
+    url(r'auth/obtain/', obtain_jwt_token)
+] + router_v1.urls
+
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
-    url(r'^v1/', include(router_v1.urls))
+    url(r'^v1/', include(api_v1))
 ]
 
 # This is an inefficient helper for viewing images during development.
